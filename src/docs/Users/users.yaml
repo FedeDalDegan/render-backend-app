@@ -1,0 +1,156 @@
+paths:
+  /api/users:
+    get:
+      summary: Obtener todos los usuarios de mi base de datos
+      tags: 
+        - Users
+      responses:
+        "200":
+          description: Usuarios obtenidos correctamente
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "500":
+          description: Error al obtener usuarios
+    post:
+      summary: Crear un nuevo usuario
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "500":
+          description: Error al crear usuario
+  /api/users/{id}:
+    get: 
+      summary: Obtener un usuario
+      tags: 
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del usuario a buscar
+      responses:
+        "200":
+          description: Usuario obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuario no existe
+        "500":
+          description: Error al obtener usuario
+    put: 
+      summary: Actualizar la información de un usuario
+      tags: 
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del usuario a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuario no encontrado
+        "500":
+          description: Error al actualizar usuario
+    delete: 
+      summary: Eliminar un usuario
+      tags: 
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del usuario a eliminar
+      responses:
+        "200":
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuario no encontrado
+        "500":
+          description: Error al eliminar usuario
+components:
+  schemas:
+    User: 
+      type: object
+      properties: 
+        _id: 
+          type: string
+          description: ID Autogenerado por MongoDB
+        first_name: 
+          type: string
+          description: Nombre del usuario
+        last_name: 
+          type: string
+          description: Apellido del usuario
+        email: 
+          type: string
+          description: Email del usuario
+        password: 
+          type: string
+          description: Contraseña del usuario
+        role: 
+          type: string
+          description: Rol del usuario
+      example:
+        _id: "123user456"
+        first_name: FonohA
+        last_name: DeusEx
+        email: fnh@gmail.com
+        password: fonohaContrasenia4321

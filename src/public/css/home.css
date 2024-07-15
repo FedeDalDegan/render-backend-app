@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body{
+    background-image: linear-gradient(to right bottom, #323131, #2c2a2b, #272425, #201e21, #19181c, #15161b, #0f1319, #071117, #051217, #031316, #021315, #021413);
+}
+
+main h1{
+    color: bisque;
+    text-align: center;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+.cardContainerStyle{
+    padding: 25px;
+    margin: 0px 100px 0px 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 55px;
+}
+
+.cardContainerStyle p{
+    font-size: 20px;
+}
+
+.cardContainerStyle span{
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.cardContainerStyle img{
+    border: 2px solid black;
+}
+
+.cardContainer{
+    padding-top: 2%;
+    background-color: whitesmoke;
+    border-radius: 5%;
+    width: 350px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 55px;
+    box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
+    user-select: none; /* Momentaneo. Sera removido en un futuro */
+}
+
+.cardGameAndTitle{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.cardPriceAndStock{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+header, footer{
+    color: wheat;
+}

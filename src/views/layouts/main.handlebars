@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App con handlebars</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/{{css}}"> {{! El usuario setea dinamicamente que CSS utilizara}}
+</head>
+<body>
+    {{!-- Para referenciar un componente, lo encerramos entre llaves y usamos " > " --}}
+    {{!-- Como nav y footer suelen ser estaticos y no se modifican, podemos dejarlos implementados de esta manera --}}
+    <header>
+        {{>nav}}
+    </header>
+
+    {{!-- Sin embargo, los main siempre cambian y se renderizan con distinta informacion.
+    Es aqui donde se aplica el dinamismo --}}
+    <main>
+        <div class="cardContainerStyle">
+            {{{body}}}
+        </div>
+    </main>
+
+    <footer>
+        {{>footer}}
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+
+    {{!-- Link de instalacion de SOCKET.IO https://socket.io/docs/v4/client-installation/ --}}
+</body>
+</html>

@@ -1,0 +1,207 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtener productos con paginación y filtros
+      tags: 
+        - Products
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Límite de productos por página
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Página de productos a obtener
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filtro a aplicar (status o categoría)
+        - name: ord
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Ordenamiento de productos por precio (ascendente o descendente)
+      responses:
+        "200":
+          description: Productos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+                  totalDocs:
+                    type: integer
+                  limit:
+                    type: integer
+                  totalPages:
+                    type: integer
+                  page:
+                    type: integer
+                  pagingCounter:
+                    type: integer
+                  hasPrevPage:
+                    type: boolean
+                  hasNextPage:
+                    type: boolean
+                  prevPage:
+                    type: integer
+                    nullable: true
+                  nextPage:
+                    type: integer
+                    nullable: true
+        "500":
+          description: Error interno del servidor
+
+    post:
+      summary: Crear un nuevo producto
+      tags: 
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Producto creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "403":
+          description: Usuario no autorizado a crear un producto
+        "500":
+          description: Error interno del servidor
+
+  /api/products/{pid}:
+    get:
+      summary: Obtener un producto por ID
+      tags: 
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a buscar
+      responses:
+        "200":
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Producto no existe
+        "500":
+          description: Error interno del servidor al consultar producto
+
+    put:
+      summary: Actualizar un producto por ID
+      tags: 
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Producto actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "403":
+          description: Usuario no autorizado a actualizar un producto
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      summary: Eliminar un producto por ID
+      tags: 
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a eliminar
+      responses:
+        "200":
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "403":
+          description: Usuario no autorizado a eliminar un producto
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID del producto
+        name:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto
+        price:
+          type: number
+          format: float
+          description: Precio del producto
+        category:
+          type: string
+          description: Categoría del producto
+        status:
+          type: boolean
+          description: Estado del producto (disponible o no)
+        stock:
+          type: integer
+          description: Cantidad en stock del producto
+      required:
+        - name
+        - description
+        - price
+        - category
+        - status
+        - stock
+      example:
+        _id: "60c72b2f9b1d4c23d8d4a2e6"
+        name: "Producto de ejemplo"
+        description: "Esta es la descripción de un producto de ejemplo."
+        price: 99.99
+        category: "Ejemplo"
+        status: true
+        stock: 50
