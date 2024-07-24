@@ -10,6 +10,25 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const deleteUser = async (req, res) => {
+    try{
+        if(req.user.rol === "Admin"){
+            const userId = req.params.uid
+            const user = await userModel.findByIdAndDelete(userId)
+
+            if(!user){
+                return res.status(404).send("Usuario no encontrado")
+            }
+            
+            res.status(200).send("Usuario eliminado: " + user)
+        }else{
+            res.status(403).send("No autorizado a la eliminacion de usuario")
+        }
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
+
 export const sendDocuments = async (req, res) => {
     try{
         const {uid} = req.params
@@ -31,10 +50,3 @@ export const sendDocuments = async (req, res) => {
     }
 }
 
-export const imagesProds = async (req, res) => {
-    try{
-
-    }catch(e){
-        res.status(500).send(e)
-    }
-}

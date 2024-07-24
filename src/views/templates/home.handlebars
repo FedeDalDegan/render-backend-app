@@ -11,14 +11,12 @@ caso contrario, se ejecuta el "else" --}}
             <span>{{this.title}}</span>
         </div>
         <p>Genero: <span>{{this.desc}}</span></p>
-        <img src={{this.img}} alt="Descripcion de {{this.desc}}">
+        <img src={{this.thumbnail}} alt="Descripcion de {{this.desc}}">
         <div class="cardPriceAndStock">
             <p>Precio: ${{this.price}}</p>
             <p>Stock: {{this.stock}}</p>
         </div>
     </div>
 {{/each}}
-{{else}}
-    <p>No se pueden mostrar los productos</p>
 {{/if}}
 {{!-- Siempre hacer que cerrar la declarion if, else con un {{/if}} --}}

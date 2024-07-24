@@ -30,7 +30,8 @@ const userSchema = new Schema({
     },
     cart_id: {
         type: Schema.Types.ObjectId, // Obtenemos el ID generado por nuestra base de datos
-        ref: "carts" // "Products" es el nombre de nuestra coleccion almacenada en nuestra BDD. De aqui se sacara el ID de referencia
+        ref: "carts", // "Products" es el nombre de nuestra coleccion almacenada en nuestra BDD. De aqui se sacara el ID de referencia
+        default: [],
     },
     documents: {
         type: Object,
@@ -52,7 +53,7 @@ userSchema.pre("save", async function(next) {
 
 userSchema.pre("find", async function(next) {
     try{
-        const prods = await cartModel.findOne({ _id: "" })
+        const prods = await cartModel.findOne({ _id: "667217b8262d59ac108cab42" })
         this.populate("cart_id")
     }catch(e){
         next(e)

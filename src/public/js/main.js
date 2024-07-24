@@ -27,6 +27,7 @@ const chatBox = document.getElementById("chatBox")
 const messageLogs = document.getElementById("messageLogs")
 let user;
 
+/*
 Swal.fire({
     title: "Inicio de sesion",
     input: "text",
@@ -39,6 +40,7 @@ Swal.fire({
     user = resultado.value // Guardo el nombre en "user"
     console.log(user)
 })
+*/
 
 // Estos mensajes se almacenan en la constante "mensajes"
 chatBox.addEventListener("change", (e) => {

@@ -10,16 +10,15 @@ productsRouter.get('/', async (req, res) => {
         // Si el usuario no nos envia alguna de estas peticiones, se le devolvera un valor por defecto. Ejemplo limit = 10, page = 1
         const { limit = 10, page = 1, filter, ord } = req.query
         const prods = await getProducts(limit, page, filter, ord)
+        const simpleProds = JSON.parse(JSON.stringify(prods.docs)) // Parseamos los objetos para evitar configuracion adicional de handlebars.
 
-        /*
         res.status(200).render("templates/home", { // Este es el nombre del handlebar home
             mostrarProductos: true,
-            productos: prods, // Esto sera lo que renderizaremos
+            productos: simpleProds, // Esto sera lo que renderizaremos
             css: "home.css"
         })
-        */
-       res.status(200).send(prods)
-    } catch (error) {
+
+    }catch (error) {
         res.status(500).render("templates/error", { // Este es el nombre del handlebar error
             error: error,
         })
